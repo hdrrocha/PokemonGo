@@ -11,7 +11,7 @@ import MapKit
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var mapa: MKMapView!
     var gerenciadorLocalizacao = CLLocationManager()
-    
+    var contador = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         //quem via vai gerenciar esse mapa é essa propria class
@@ -19,11 +19,57 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         gerenciadorLocalizacao.delegate = self
         gerenciadorLocalizacao.requestWhenInUseAuthorization()
         gerenciadorLocalizacao.startUpdatingLocation()
+        
+        //Exibir pokemon
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
+            print("exibe anotacao")
+            if let coordenadas = self.gerenciadorLocalizacao.location?.coordinate{
+                let anotacao = MKPointAnnotation()
+                
+                let latAleatoria = (Double(arc4random_uniform(400)) - 250)/100000.0
+                let longAleatoria = (Double(arc4random_uniform(400)) - 250)/100000.0
+                anotacao.coordinate =  coordenadas
+                anotacao.coordinate.latitude += latAleatoria
+                anotacao.coordinate.longitude += longAleatoria
+                
+    
+                self.mapa.addAnnotation(anotacao)
+                
+            }
+          
+        }
     }
 
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let anotacaoView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+       
+        
+        if annotation is MKUserLocation {
+            anotacaoView.image = #imageLiteral(resourceName: "player")
+        } else {
+             anotacaoView.image = #imageLiteral(resourceName: "charmander")
+        }
+        
+        var frame = anotacaoView.frame
+        frame.size.height = 40
+        frame.size.width = 40
+        
+        anotacaoView.frame = frame
+        return anotacaoView
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if contador < 5 {
+            self.centralizar()
+            contador += 1
+        } else {
+            gerenciadorLocalizacao.startUpdatingLocation()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -47,6 +93,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
 
-
+    func centralizar () {
+        if let coodernadas = gerenciadorLocalizacao.location?.coordinate  {
+            let regiao = MKCoordinateRegionMakeWithDistance(coodernadas, 200, 200)
+            mapa.setRegion(regiao, animated: true)
+        }
+    }
+    @IBAction func centralizarJogador(_ sender: Any) {
+       self.centralizar()
+    }
+    @IBAction func abrirPokedex(_ sender: Any) {
+    }
+    
 }
 

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,15 +19,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j5A-Qt-bRN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIJ-3s-Pm5">
+                                <rect key="frame" x="315" y="30" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="G6o-hG-RcO"/>
+                                    <constraint firstAttribute="height" constant="50" id="o8Q-6U-tRb"/>
+                                </constraints>
+                                <state key="normal" image="compass"/>
+                                <connections>
+                                    <action selector="centralizarJogador:" destination="BYZ-38-t0r" eventType="touchUpInside" id="69s-gf-wdt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lo-hb-vp2">
+                                <rect key="frame" x="162.5" y="607" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8aV-Nq-Fqr"/>
+                                    <constraint firstAttribute="height" constant="50" id="EpN-Pq-M2G"/>
+                                </constraints>
+                                <state key="normal" image="pokeball"/>
+                                <connections>
+                                    <action selector="abrirPokedex:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWY-pc-DbO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NMk-pr-h12"/>
-                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cWG-rx-lhM"/>
-                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="usc-uE-Kft"/>
-                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xIT-ym-Hg4"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0kc-cs-UsQ"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="1Vj-0P-2bu"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OHe-cw-1cM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yIJ-3s-Pm5" secondAttribute="trailing" constant="10" id="WrZ-7r-9lw"/>
+                            <constraint firstItem="yIJ-3s-Pm5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="ZIr-ZP-mab"/>
+                            <constraint firstItem="3Lo-hb-vp2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gNI-72-sUd"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="mra-uP-uU0"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nTP-bE-JjC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3Lo-hb-vp2" secondAttribute="bottom" constant="10" id="qz8-tG-6p7"/>
+                            <constraint firstItem="j5A-Qt-bRN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="sfw-15-Afd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,4 +68,8 @@
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="compass" width="512" height="512"/>
+        <image name="pokeball" width="512" height="512"/>
+    </resources>
 </document>
