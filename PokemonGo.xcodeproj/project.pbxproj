@@ -16,6 +16,7 @@
 		9E4688FD20486EB9003C8108 /* PokemonGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4688FC20486EB9003C8108 /* PokemonGoTests.swift */; };
 		9E46890820486EB9003C8108 /* PokemonGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E46890720486EB9003C8108 /* PokemonGoUITests.swift */; };
 		9E46891720486FCC003C8108 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E46891620486FCC003C8108 /* MapKit.framework */; };
+		9EB809942049CA8500514ABC /* CoreDataPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB809932049CA8500514ABC /* CoreDataPokemon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9E46890720486EB9003C8108 /* PokemonGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGoUITests.swift; sourceTree = "<group>"; };
 		9E46890920486EB9003C8108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E46891620486FCC003C8108 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9EB809932049CA8500514ABC /* CoreDataPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPokemon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				9E4688F020486EB8003C8108 /* LaunchScreen.storyboard */,
 				9E4688F320486EB8003C8108 /* Info.plist */,
 				9E4688EB20486EB8003C8108 /* PokemonGo.xcdatamodeld */,
+				9EB809932049CA8500514ABC /* CoreDataPokemon.swift */,
 			);
 			path = PokemonGo;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB809942049CA8500514ABC /* CoreDataPokemon.swift in Sources */,
 				9E4688E720486EB8003C8108 /* ViewController.swift in Sources */,
 				9E4688E520486EB8003C8108 /* AppDelegate.swift in Sources */,
 				9E4688ED20486EB8003C8108 /* PokemonGo.xcdatamodeld in Sources */,

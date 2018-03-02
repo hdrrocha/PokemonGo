@@ -16,6 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidLoad()
         //quem via vai gerenciar esse mapa é essa propria class
         mapa.delegate = self
+        mapa.showsUserLocation = true
         gerenciadorLocalizacao.delegate = self
         gerenciadorLocalizacao.requestWhenInUseAuthorization()
         gerenciadorLocalizacao.startUpdatingLocation()
@@ -57,6 +58,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         anotacaoView.frame = frame
         return anotacaoView
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -99,9 +101,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapa.setRegion(regiao, animated: true)
         }
     }
+    
     @IBAction func centralizarJogador(_ sender: Any) {
        self.centralizar()
     }
+    
     @IBAction func abrirPokedex(_ sender: Any) {
     }
     
