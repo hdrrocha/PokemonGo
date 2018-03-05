@@ -12,6 +12,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var mapa: MKMapView!
     var gerenciadorLocalizacao = CLLocationManager()
     var contador = 0
+    var coreDataPokemon:CoreDAtaPokemon!
+    var pokemon: [Pokemon] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //quem via vai gerenciar esse mapa é essa propria class
@@ -21,15 +24,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         gerenciadorLocalizacao.requestWhenInUseAuthorization()
         gerenciadorLocalizacao.startUpdatingLocation()
         
+        
+        //Recuperar pokemons
+        self.coreDataPokemon = CoreDAtaPokemon()
+        self.pokemon = self.coreDataPokemon.recuperarTodosPokemon()
+        
         //Exibir pokemon
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
             print("exibe anotacao")
             if let coordenadas = self.gerenciadorLocalizacao.location?.coordinate{
-                let anotacao = MKPointAnnotation()
+                
+                let totalPokemon = UInt32(self.pokemon.count)
+                let indicePokemonAleatorio = arc4random_uniform(totalPokemon)
+                
+                let pokemon = self.pokemon[Int(indicePokemonAleatorio)]
+                print(pokemon.nome)
+                
+                
+                
+//                let anotacao = MKPointAnnotation()
+                let anotacao = PokemonAnotacao(coordenadas: coordenadas, pokemon: pokemon)
                 
                 let latAleatoria = (Double(arc4random_uniform(400)) - 250)/100000.0
                 let longAleatoria = (Double(arc4random_uniform(400)) - 250)/100000.0
-                anotacao.coordinate =  coordenadas
+//                anotacao.coordinate =  coordenadas
                 anotacao.coordinate.latitude += latAleatoria
                 anotacao.coordinate.longitude += longAleatoria
                 
@@ -48,7 +66,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if annotation is MKUserLocation {
             anotacaoView.image = #imageLiteral(resourceName: "player")
         } else {
-             anotacaoView.image = #imageLiteral(resourceName: "charmander")
+            let pokemon = (annotation as! PokemonAnotacao).pokemon
+            anotacaoView.image =  UIImage(named: pokemon.imagem!)
         }
         
         var frame = anotacaoView.frame
@@ -66,7 +85,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if contador < 5 {
+        if contador < 3 {
             self.centralizar()
             contador += 1
         } else {
