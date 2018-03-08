@@ -78,6 +78,48 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return anotacaoView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        let anotacao = view.annotation
+        let pokemon = (view.annotation as! PokemonAnotacao).pokemon
+        
+        mapView.deselectAnnotation(anotacao, animated: true)
+        if anotacao is MKUserLocation {
+            return
+        }
+        
+        if let coodernadas = anotacao?.coordinate  {
+            let regiao = MKCoordinateRegionMakeWithDistance(coodernadas, 200, 200)
+            mapa.setRegion(regiao, animated: true)
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
+            if let coord =  self.gerenciadorLocalizacao.location?.coordinate {
+                if MKMapRectContainsPoint(self.mapa.visibleMapRect, MKMapPointForCoordinate(coord)) {
+            
+                    self.coreDataPokemon.salvarPokemon(pokemon: pokemon)
+                    self.mapa.removeAnnotation(anotacao!)
+                    
+                    let alertController = UIAlertController(title: "Parabéns", message: "Você capturou o pokemonio: \(String(describing: pokemon.nome))", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    let alertController = UIAlertController(title: "Alerta", message: " \(String(describing: pokemon.nome)) Está fora de alcance", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+       
+        
+      
+        
+        
+       
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
